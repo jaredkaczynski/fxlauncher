@@ -92,7 +92,6 @@ public class Launcher extends Application {
             Platform.runLater(() -> Thread.currentThread().setContextClassLoader(classLoader));
         }
 
-
     };
 
     /**
@@ -235,12 +234,6 @@ public class Launcher extends Application {
     }
 
     private void startApplication() throws Exception {
-        if (app != null) {
-            ParametersImpl.registerParameters(app, new LauncherParams(getParameters(), superLauncher.getManifest()));
-            PlatformImpl.setApplicationName(app.getClass());
-            superLauncher.setPhase("Application Init");
-            app.start(primaryStage);
-        } else {
             // Start any executable jar (i.E. Spring Boot);
             String firstFile = superLauncher.getManifest().files.get(0).file;
             log.info(String.format("No app class defined, starting first file (%s)", firstFile));
@@ -248,6 +241,5 @@ public class Launcher extends Application {
             String command = String.format("java -jar %s/%s", cacheDir.toAbsolutePath(), firstFile);
             log.info(String.format("Execute command '%s'", command));
             Runtime.getRuntime().exec(command);
-        }
     }
 }
