@@ -234,12 +234,21 @@ public class Launcher extends Application {
     }
 
     private void startApplication() throws Exception {
-            // Start any executable jar (i.E. Spring Boot);
-            String firstFile = superLauncher.getManifest().files.get(0).file;
-            log.info(String.format("No app class defined, starting first file (%s)", firstFile));
-            Path cacheDir = superLauncher.getManifest().resolveCacheDir(getParameters().getNamed());
-            String command = String.format("java -jar %s/%s", cacheDir.toAbsolutePath(), firstFile);
-            log.info(String.format("Execute command '%s'", command));
-            Runtime.getRuntime().exec(command);
+        // Start any executable jar (i.E. Spring Boot);
+        String firstFile = superLauncher.getManifest().files.get(0).file;
+        System.out.println(firstFile);
+
+        for (LibraryFile file : superLauncher.getManifest().files) {
+            if (file.file.toLowerCase().contains("ghost")) {
+                firstFile = file.file;
+                break;
+            }
+        }
+        System.out.println(firstFile);
+        log.info(String.format("No app class defined, starting first file (%s)", firstFile));
+        Path cacheDir = superLauncher.getManifest().resolveCacheDir(getParameters().getNamed());
+        String command = String.format("java -jar %s/%s", cacheDir.toAbsolutePath(), firstFile);
+        log.info(String.format("Execute command '%s'", command));
+        Runtime.getRuntime().exec(command);
     }
 }
