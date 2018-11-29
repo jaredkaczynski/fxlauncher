@@ -164,13 +164,12 @@ public abstract class AbstractLauncher<APP>  {
         for (String preloadLib : preloadLibs)
             System.loadLibrary(preloadLib);
 
-        Path cacheDir = manifest.resolveCacheDir(getParameters() != null ? getParameters().getNamed() : null);
+        //Path cacheDir = manifest.resolveCacheDir(getParameters() != null ? getParameters().getNamed() : null);
 
-        ClassLoader classLoader = createClassLoader(cacheDir);
-        log.info(String.format("Loading appClass %s", manifest.launchClass));
-        Class<APP> appclass = (Class<APP>) classLoader.loadClass(manifest.launchClass);
-
-        createApplication(appclass);
+        //ClassLoader classLoader = createClassLoader(cacheDir);
+        //log.info(String.format("Loading appClass %s", manifest.launchClass));
+        //Class<APP> appclass = (Class<APP>) classLoader.loadClass(manifest.launchClass);
+        //createApplication(appclass);
     }
 
     protected void syncManifest() throws Exception {

@@ -47,7 +47,7 @@ public class HeadlessMainLauncher extends AbstractLauncher<Object>
 
         syncFiles();
 
-        createApplicationEnvironment();
+        //createApplicationEnvironment();
         launchApp();
     }
 
