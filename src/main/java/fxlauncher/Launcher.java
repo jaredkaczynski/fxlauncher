@@ -251,7 +251,7 @@ public class Launcher extends Application {
         Path cacheDir = superLauncher.getManifest().resolveCacheDir(getParameters().getNamed());
         String command = String.format("java -jar \"%s/%s\"", cacheDir.toAbsolutePath(), firstFile);
         if(windowsJarExists()){
-            command = String.format("bin" + File.separator + "jre1.8.0_191"
+            command = String.format("." + File.separator + "bin" + File.separator + "jre1.8.0_191"
                     + File.separator + "bin" + File.separator + "java.exe" + " -jar \"%s/%s\"", cacheDir.toAbsolutePath(), firstFile);
         }
         log.info(String.format("Execute command '%s'", command));
@@ -259,14 +259,11 @@ public class Launcher extends Application {
     }
 
     private boolean windowsJarExists() {
-        String path = null;
-        try {
-            path = Launcher.class.getProtectionDomain().getCodeSource().getLocation().toURI().toString()
-                    + File.separator + "bin" + File.separator + "jre1.8.0_191"
-                    + File.separator + "bin" + File.separator + "java.exe";
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        String path;
+        log.info("." + File.separator + "bin" + File.separator + "jre1.8.0_191"
+                + File.separator + "bin" + File.separator + "java.exe");
+        path = "." + File.separator + "bin" + File.separator + "jre1.8.0_191"
+                + File.separator + "bin" + File.separator + "java.exe";
         return new File(path).exists();
     }
 }
